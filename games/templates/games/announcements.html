@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}お知らせ | AtCoder Games{% endblock %}
+
+{% block content %}
+    <h1 class="my-3">お知らせ</h1>
+    {% if announcement_list %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Message</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for announcement in announcement_list %}
+                <tr>
+                    <td>{{ announcement.date|date:'Y-m-d' }}</td>
+                    <td>{{ announcement.message }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>お知らせはありません</p>
+    {% endif %}
+{% endblock %}

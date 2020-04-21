@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}AtCoder Games{% endblock %}</title>
+        <meta name="description" content="AtCoder Games">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    </head>
+    <body class="bg-white">
+
+        <nav class="navbar navbar-expand-sm navbar-fixed-top navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'games:index' %}">AtCoder Games</a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar-list">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'games:about' %}">このサイトについて</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'games:announcements' %}">お知らせ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'games:list' %}">ゲーム</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container p-3">
+            {% block content %}{% endblock %}
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        {% block script %}{% endblock %}
+    </body>
+</html>

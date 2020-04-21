@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ゲーム | AtCoder Games{% endblock %}
+
+{% block content %}
+    <h1 class="my-3">ゲーム</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Date Added</th>
+                <th scope="col">Problem</th>
+                <th scope="col">Contest</th>
+                <th scope="col">Difficulty</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for game in game_list %}
+            <tr class="game" data-problem="{{ game.problem_id }}">
+                <td>{{ game.date_added|date:'Y-m-d' }}</td>
+                <td><a class="title" href="{% url 'games:detail' game.problem_id %}">{{ game.title }}</a></td>
+                <td>{{ game.contest }}</td>
+                <td class="diff">-</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'games/difficulty.js' %}"></script>
+{% endblock %}
