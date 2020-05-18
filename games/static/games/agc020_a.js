@@ -31,7 +31,6 @@ function render() {
         }
     }
     changePlayground(playground.join(''));
-    showTurn();
 }
 
 function isGameOver() {
@@ -61,8 +60,10 @@ function movePlayer(d) {
     } else if (!isValid(player.position + d, computer.position)) {
         showErrorMessage('無効な操作');
     } else {
-        player.position += d;
         showErrorMessage('');
+
+        player.position += d;
+
         render();
         if (isGameOver()) {
             finishGame(player);
@@ -109,6 +110,7 @@ function checkVariables(N, A, B) {
         showErrorMessage('AとBには異なる整数を入力してください');
         return false;
     }
+    showErrorMessage('');
     return true;
 }
 
@@ -119,7 +121,6 @@ function startGame(variables) {
     B = parseInt(variables['B']);
 
     if (checkVariables(N, A, B)) {
-        showErrorMessage('');
 
         if (player.name === person.A) {
             player.position = A;
@@ -130,6 +131,7 @@ function startGame(variables) {
         }
 
         turn = person.A;
+        showTurn();
 
         addButton('<', function () {
             movePlayer(-1);

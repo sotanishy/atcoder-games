@@ -12,21 +12,21 @@ let score;
 
 // functions
 function render() {
-    let pg = '';
+    let pg = '<pre>';
     for (let i = 0; i < s.length; i++) {
         pg += s.charAt(i);
         if (i !== s.length - 1) pg += ' ';
-        else pg += '<br>';
+        else pg += '\n';
     }
     for (let i = 0; i < s.length; i++) {
         if (i < playerHand.length) pg += playerHand.charAt(i);
         else pg += '_';
         if (i !== playerHand.charAt(i)) pg += ' ';
-        else pg += '<br>';
+        else pg += '\n';
     }
-    pg += '<br>Score: ' + score;
+    pg += '</pre>';
+    pg += 'Score: ' + score;
     changePlayground(pg);
-    showTurn();
 }
 
 function movePlayer(hand) {
@@ -100,6 +100,8 @@ function startGame(variables) {
 
     if (checkVariables(s)) {
         turn = person.A;
+        showTurn();
+
         playerHand = '';
         score = 0;
 

@@ -9,7 +9,7 @@
     <p>コンテスト: {{ game.contest }}</p>
     <p><a href="https://atcoder.jp/contests/{{ game.contest_id }}/tasks/{{ game.problem_id }}">問題へのリンク</a></p>
     <h3>遊び方</h3>
-    <p>{{ game.how_to_play }}</p>
+    <p>{{ game.how_to_play|safe }}</p>
 
     <form id="form" class="m-2">
         <div class="form-group">

@@ -6,6 +6,7 @@ let computer = {};
 let turn;
 let numVariables = [];
 let strVariables = [];
+let gridVariables = [];
 
 // functions
 function showMessage(text) {
@@ -41,6 +42,7 @@ function showWA() {
 function changeTurn() {
     if (turn === person.A) turn = person.B;
     else turn = person.A;
+    showTurn();
 }
 
 function changePlayground(text) {
@@ -61,9 +63,9 @@ function addButton(text, callback) {
 }
 
 function addInput(text, callback) {
-    let group = $('<div class="form-group row"></div>');
-    group.append($(`<input type="text" class="col-sm-10 form-control" id="input-${text}" placeholder=${text}>`));
-    group.append($('<button type="submit" class="col-sm-2 btn btn-secondary">送信</button>'));
+    let group = $('<div class="form-group row justify-content-md-center"></div>');
+    group.append($(`<input type="text" class="col-sm-5 form-control" id="input-${text}" placeholder=${text}>`));
+    group.append($('<button type="submit" class="col-sm-1 btn btn-secondary">送信</button>'));
     let form = $('<form></form>').append(group).submit(function (e) {
         e.preventDefault();
         callback($(`#input-${text}`).val());
@@ -93,6 +95,13 @@ $(document).ready(function () {
         $('#variables').append(group);
     });
 
+    gridVariables.forEach(v => {
+        let group = $('<div class="form-group row"></div>');
+        group.append($(`<label for="var-${v}" class="col-sm-2">${v}</label>`));
+        group.append($(`<textarea class="col-sm-10 form-control" id="var-${v}">`));
+        $('#variables').append(group);
+    })
+
     $('#form').submit(function (e) {
         e.preventDefault();
         if (choosePlayer) {
@@ -113,6 +122,9 @@ $(document).ready(function () {
             variables[v] = $(`#var-${v}`).val();
         });
         strVariables.forEach(v => {
+            variables[v] = $(`#var-${v}`).val();
+        });
+        gridVariables.forEach(v => {
             variables[v] = $(`#var-${v}`).val();
         });
         showWJ();

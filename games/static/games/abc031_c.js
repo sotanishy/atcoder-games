@@ -3,7 +3,7 @@ choosePlayer = false;
 person.A = '高橋君';
 person.B = '青木君';
 numVariables = ['N'];
-strVariables = ['a'];
+strVariables = ['S'];
 
 // additional global variables
 let N;
@@ -29,11 +29,9 @@ function render(t) {
         pg += '<br>Score: ' + takScore[t];
     }
     changePlayground(pg);
-    showTurn();
 }
 
 function movePlayer(i) {
-    i = parseInt(i);
     if (turn !== player.name) {
         showErrorMessage('あなたのターンではありません');
     } else if (isNaN(i)) {
@@ -85,15 +83,16 @@ function checkVariables(N, S) {
         showErrorMessage('数字を入力してください');
         return false;
     } else if (S.length != N) {
-        showErrorMessage('Nとaの長さが一致しません');
+        showErrorMessage('NとSの長さが一致しません');
         return false;
     } else if (N < 2 || 50 < N) {
         showErrorMessage('Nには2以上50以下の整数を入力してください');
         return false;
     } else if (S.some(x => x < -50 || 50 < x)) {
-        showErrorMessage('aの要素には-50以上50以下の整数を入力してください');
+        showErrorMessage('Sの要素には-50以上50以下の整数を入力してください');
         return false;
     }
+    showErrorMessage('');
     return true;
 }
 
@@ -102,14 +101,13 @@ function startGame(variables) {
     S = variables['S'].split(' ').map(x => parseInt(x));
 
     if (checkVariables(N, S)) {
-        showErrorMessage('');
-
         turn = person.A;
+        showTurn();
 
         calcAns();
 
         addInput('左から何番目の要素を選ぶか入力してください', function (value) {
-            movePlayer(value);
+            movePlayer(parseInt(value));
         });
 
         render(-1);
